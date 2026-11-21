@@ -222,7 +222,15 @@ children:
 
 ## Context from the real study
 
-In the real study the four model families were benchmarked with this
+This repository is a separate, synthetic re-implementation; it is not the
+thesis code. The thesis itself lives in a private UNSW repository and runs as
+five R Markdown stages: data preparation and exploratory analysis, multiple
+imputation with `mice`, feature selection and model fitting (LASSO, elastic
+net, random forest, XGBoost and recursive partitioning), bootstrap validation
+with recalibration, and decision curve analysis with SHAP. The numbers in this
+README come from the simulator and will not match the thesis.
+
+In the real study the model families were benchmarked with this
 validation design on the linked Breathing for Life records. **The selected
 model reached an AUC of 0.82**, and a manuscript is in preparation. Because
 those records are confidential, the real data-quality log, feature values and
