@@ -1,0 +1,4 @@
+table,raw_rows,clean_rows,rows_removed
+births,6030,6000,30
+gp_visits,33603,33418,185
+ed_presentations,3202,3170,32

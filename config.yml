@@ -1,0 +1,32 @@
+# Pipeline configuration.
+# Every script reads this file, so a change here propagates end to end.
+
+simulation:
+  seed: 20260301            # master seed; the simulator is fully reproducible from it
+  n_births: 6000            # synthetic births (two birth years, 2022-2023)
+  extract_end: "2024-12-31" # pretend data-extract date; follow-up is censored here
+  target_prevalence: 0.19   # outcome prevalence in the full cohort (first 365 days)
+
+design:
+  landmark_days: 60         # features may only use information up to this age (days)
+  horizon_days: 365         # outcome window: respiratory diagnosis on day (landmark, 365]
+  outcome_codes:            # ICD-10-AM codes that define the outcome
+    - "J21"                 # acute bronchiolitis (prefix match: J21.0, J21.9 ...)
+    - "R06.2"               # wheezing
+
+modelling:
+  seed: 20260302
+  test_fraction: 0.30       # stratified hold-out share
+  n_boot: 50                # optimism bootstrap resamples (200 used for the full run)
+  n_boot_ci: 1000           # resamples of the test set for AUC confidence intervals
+  dca_thresholds: [0.05, 0.50, 0.01]   # from, to, by
+  clinical_threshold: 0.15  # threshold quoted in the comparison table
+  xgb_max_rounds: 600
+  rf_num_trees: 300
+
+paths:
+  synthetic_dir: "data/synthetic"
+  sqlite: "data/synthetic/linked.sqlite"
+  output_dir: "output"
+  figures_dir: "figures"
+  sql_dir: "sql"

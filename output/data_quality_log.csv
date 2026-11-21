@@ -1,0 +1,20 @@
+issue,source_table,n_rows,rule,action
+duplicate_birth_record,births,30,child_id appears more than once in the birth extract,Keep the most complete record (then first supplied); conflicting versions listed for manual review
+implausible_birth_weight,births,18,birth_weight_g outside 300-6500 g,Values 0.3-6.5 treated as kilograms and rescaled to grams; other values set to NULL
+missing_gestational_age,births,210,gestational_age_weeks is NULL,Retain; median-imputed in feature step with a missingness indicator
+implausible_gestational_age,births,8,gestational_age_weeks outside 20-44 weeks,Set to NULL (then handled as missing)
+implausible_maternal_age,births,6,maternal_age outside 12-55 years,Set to NULL (then handled as missing)
+invalid_sex_code,births,0,"sex not in {M, F}",Set to NULL
+birth_weight_gestation_mismatch,births,4,term birth < 1000 g or <= 28 weeks and > 2500 g,Flag for review; retained unchanged
+implausible_sibling_interval,births,12,two children of the same mother born 1-200 days apart,Retain children; the flagged mother_id links are ignored when counting siblings in the extract
+gp_orphan_visit,gp_visits,70,child_id has no birth record,Drop encounter (cannot be linked); counts reported to data custodian
+ed_orphan_visit,ed_presentations,20,child_id has no birth record,Drop encounter (cannot be linked); counts reported to data custodian
+gp_visit_before_birth,gp_visits,45,visit_date earlier than child's date of birth,Drop encounter (mis-link or DOB error)
+ed_visit_before_birth,ed_presentations,12,presentation_date earlier than child's date of birth,Drop encounter (mis-link or DOB error)
+gp_visit_after_extract,gp_visits,10,visit_date after the extract date,Drop encounter
+ed_visit_after_extract,ed_presentations,0,presentation_date after the extract date,Drop encounter
+gp_duplicate_visit_row,gp_visits,60,same gp_record_id supplied more than once,Keep one copy (SELECT DISTINCT)
+ed_duplicate_visit_row,ed_presentations,0,same ed_record_id supplied more than once,Keep one copy (SELECT DISTINCT)
+ed_invalid_triage,ed_presentations,0,triage_category outside 1-5,Drop encounter
+gp_missing_reason_code,gp_visits,0,reason_code missing,Retain; counted as a visit with unknown reason
+duplicate_birth_record_conflicting,births,10,duplicated child_id whose copies disagree on a clinical field,Listed in output/data_quality_detail.csv for manual adjudication

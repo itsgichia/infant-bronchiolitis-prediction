@@ -1,0 +1,45 @@
+feature,group,description,type,role,clinical_model
+child_id,id,Pseudonymised child identifier,id,id,0
+outcome,outcome,Wheeze (R06.2) or bronchiolitis (J21.x) diagnosis in GP or ED on days 61-365,binary,outcome,0
+sex_male,demographic,Male sex,binary,predictor,1
+gestational_age_weeks,perinatal,Completed weeks of gestation (median-imputed if missing),numeric,predictor,0
+ga_missing,perinatal,Gestational age missing or implausible in source,binary,predictor,0
+preterm,perinatal,Born before 37 weeks,binary,predictor,1
+very_preterm,perinatal,Born before 32 weeks,binary,predictor,0
+birth_weight_g,perinatal,Birth weight in grams (median-imputed if missing),numeric,predictor,0
+bw_missing,perinatal,Birth weight missing or implausible in source,binary,predictor,0
+low_birth_weight,perinatal,Birth weight below 2500 g,binary,predictor,1
+birth_weight_z,perinatal,Birth-weight z-score within gestational week and sex,numeric,predictor,0
+small_for_gestational_age,perinatal,Birth-weight z-score below -1.28 (bottom decile),binary,predictor,0
+caesarean,perinatal,Caesarean delivery,binary,predictor,1
+parity,family,Number of previous births to the mother,count,predictor,0
+has_older_siblings,family,Parity greater than zero,binary,predictor,1
+siblings_in_extract,family,Other children of the same mother registered in the extract,count,predictor,0
+maternal_age,maternal,Maternal age at birth in years (median-imputed if missing),numeric,predictor,1
+maternal_age_lt20,maternal,Maternal age under 20,binary,predictor,0
+maternal_age_ge35,maternal,Maternal age 35 or over,binary,predictor,0
+maternal_asthma,maternal,Mother has a diagnosis of asthma,binary,predictor,1
+maternal_smoking_pregnancy,maternal,Mother smoked during pregnancy,binary,predictor,1
+seifa_quintile,socioeconomic,SEIFA disadvantage quintile of residence (1 = most disadvantaged),ordinal,predictor,0
+seifa_low,socioeconomic,SEIFA quintile 1 or 2,binary,predictor,1
+born_summer,seasonal,Born December-February,binary,predictor,0
+born_autumn,seasonal,Born March-May,binary,predictor,1
+born_winter,seasonal,Born June-August,binary,predictor,1
+season_sin,seasonal,Sine encoding of birth month,numeric,predictor,0
+season_cos,seasonal,Cosine encoding of birth month,numeric,predictor,0
+days_to_first_winter,seasonal,Days from birth to the next 1 June (0 if born in winter),numeric,predictor,0
+gp_visits_lm,utilisation,"GP visits in days 0-60, excluding outcome codes",count,predictor,1
+gp_visits_0_30,utilisation,"GP visits in days 0-30, excluding outcome codes",count,predictor,0
+gp_routine_lm,utilisation,"Routine GP visits (child health check, immunisation) up to landmark",count,predictor,0
+gp_problem_lm,utilisation,Problem-oriented GP visits up to landmark,count,predictor,0
+gp_urti_lm,utilisation,GP visits coded as upper respiratory tract infection (J06.9) up to landmark,count,predictor,0
+gp_distinct_codes_lm,utilisation,Distinct GP reason codes up to landmark,count,predictor,0
+any_gp_lm,utilisation,Any GP visit up to landmark,binary,predictor,0
+days_to_first_gp,utilisation,Age in days at first GP visit (censored at 60),numeric,predictor,0
+ed_visits_lm,utilisation,"ED presentations up to landmark, excluding outcome codes",count,predictor,1
+ed_high_acuity_lm,utilisation,ED presentations with triage category 1-3 up to landmark,count,predictor,0
+any_ed_lm,utilisation,Any ED presentation up to landmark,binary,predictor,0
+total_contacts_lm,utilisation,GP visits plus ED presentations up to landmark,count,predictor,0
+asthma_x_smoking,interaction,Maternal asthma and smoking in pregnancy,binary,predictor,0
+preterm_x_winter,interaction,Preterm birth in winter,binary,predictor,0
+risk_factor_count,composite,Count of six established risk factors,count,predictor,0
