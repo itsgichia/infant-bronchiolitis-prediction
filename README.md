@@ -231,8 +231,11 @@ with recalibration, and decision curve analysis with SHAP. The numbers in this
 README come from the simulator and will not match the thesis.
 
 In the real study the model families were benchmarked with this
-validation design on the linked Breathing for Life records. **The selected
-model reached an AUC of 0.82**, and a manuscript is in preparation. Because
+validation design on the linked Breathing for Life records. Penalised
+regression was selected; its apparent AUC of 0.794 corrects to **0.757** once
+a thousand cluster bootstrap resamples are used to take the optimism off it,
+and held-out cluster-aware validation agrees at 0.745 (95% CI 0.690 to 0.798).
+A manuscript is in preparation. Because
 those records are confidential, the real data-quality log, feature values and
 model outputs are not reproduced here. Model outputs and risk-factor summaries
 were delivered to the clinical team as a **Power BI** dashboard, which is why
